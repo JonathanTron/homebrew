@@ -17,7 +17,8 @@ class Nginx < Formula
 
   def options
     [
-      ['--with-passenger', "Compile with support for Phusion Passenger module"]
+      ['--with-passenger', "Compile with support for Phusion Passenger module"],
+      ['--with-push', "Compile with support for HTTP PUSH module"]
     ]
   end
   
@@ -41,6 +42,11 @@ class Nginx < Formula
     ]
     
     configure_args << passenger_config_args if ARGV.include? '--with-passenger'
+    if ARGV.include? '--with-push'
+      system "curl http://pushmodule.slact.net/downloads/nginx_http_push_module-0.692.tar.gz -O"
+      system "tar xzf nginx_http_push_module-0.692.tar.gz"
+      configure_args << "--add-module=nginx_http_push_module-0.692"
+    end
     
     system "./configure", *configure_args
     system "make install"
