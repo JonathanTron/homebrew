@@ -1,9 +1,15 @@
 require 'formula'
 
 class Nginx < Formula
-  url 'http://sysoev.ru/nginx/nginx-0.7.65.tar.gz'
-  md5 'abc4f76af450eedeb063158bd963feaa'
-  homepage 'http://nginx.net/'
+  url 'http://nginx.org/download/nginx-0.7.65.tar.gz'
+  head 'http://nginx.org/download/nginx-0.8.37.tar.gz'
+  homepage 'http://nginx.org/'
+
+  if ARGV.include? '--HEAD'
+    @md5='19a7d830446a81800d69c1ff4dd727c3'
+  else
+    @md5='abc4f76af450eedeb063158bd963feaa'
+  end
 
   depends_on 'pcre'
   

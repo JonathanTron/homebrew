@@ -2,8 +2,8 @@ require 'formula'
 
 class Mysql <Formula
   homepage 'http://dev.mysql.com/doc/refman/5.1/en/'
-  url 'http://mysql.llarian.net/Downloads/MySQL-5.1/mysql-5.1.45.tar.gz'
-  md5 '06b5deb3a13c7600c38ba65b9f7e42c4'
+  url 'http://mysql.llarian.net/Downloads/MySQL-5.1/mysql-5.1.47.tar.gz'
+  md5 '02b9964b3966832f3d6bc87524bfd73f'
 
   depends_on 'readline'
 
@@ -37,6 +37,7 @@ class Mysql <Formula
       "--with-plugins=innobase,myisam",
       "--with-extra-charsets=complex",
       "--with-ssl",
+      "--with-readline",
       "--enable-assembler",
       "--enable-thread-safe-client",
       "--enable-local-infile",
@@ -70,7 +71,7 @@ class Mysql <Formula
 
     Note on upgrading: 
         We overwrite any existing com.mysql.mysqld.plist in ~/Library/LaunchAgents 
-        if we are upgrading becuase previous versions of this brew created the 
+        if we are upgrading because previous versions of this brew created the 
         plist with a version specific program argument.
     
     Or start manually with:
