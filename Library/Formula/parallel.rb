@@ -1,13 +1,12 @@
 require 'formula'
 
 class Parallel <Formula
-  url 'http://mirrors.aixtools.net/sv/parallel/parallel-20100306.tar.bz2'
-  homepage 'https://savannah.nongnu.org/projects/parallel/'
-  md5 '08eb96bcda0bba6ce3d25a59d2a76289'
+  url 'ftp://ftp.gnu.org/gnu/parallel/parallel-20100424.tar.bz2'
+  homepage 'http://savannah.gnu.org/projects/parallel/'
+  md5 '7f75ec6bd43768f27aa2667a3f4ce96d'
 
   def install
-    system "make"
-    bin.install "parallel"
-    man1.install "parallel.1"
+    system "./configure", "--prefix=#{prefix}"
+    system "make install"
   end
 end
