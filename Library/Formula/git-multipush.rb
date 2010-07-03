@@ -1,9 +1,9 @@
 require 'formula'
 
 class GitMultipush <Formula
-  url 'http://git-multipush.googlecode.com/files/git-multipush-1.0.tar.bz2'
+  url 'http://git-multipush.googlecode.com/files/git-multipush-2.3.tar.bz2'
   homepage 'http://code.google.com/p/git-multipush/'
-  md5 'ca809d24857c5abe92f870f3a4f2ebe5'
+  md5 'bedccce452eaa788936e2f0e43c7fde7'
 
   # Not depending on git because people might have it
   # installed through another means

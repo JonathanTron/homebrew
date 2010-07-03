@@ -40,7 +40,11 @@ class Nginx < Formula
   def install
     args = ["--prefix=#{prefix}", "--with-http_ssl_module", "--with-pcre"]
     args << passenger_config_args if ARGV.include? '--with-passenger'
-
+    if ARGV.include? '--with-push'
+      system "curl http://pushmodule.slact.net/downloads/nginx_http_push_module-0.692.tar.gz -O"
+      system "tar xzf nginx_http_push_module-0.692.tar.gz"
+      args << "--add-module=nginx_http_push_module-0.692"
+    end
     system "./configure", *args
     system "make install"
   end
