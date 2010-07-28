@@ -18,6 +18,14 @@ def check_for_blacklisted_formula names
       Mercurial can be install thusly:
         brew install pip && pip install mercurial
     EOS
+
+    when 'setuptools' then abort <<-EOS.undent
+      When working with a Homebrew-built Python, distribute is preferred
+      over setuptools, and can be used as the prequisite for pip.
+
+      Install distribute using:
+        brew install distribute
+    EOS
     end
   end
 end
@@ -133,7 +141,7 @@ def make url
   force_text = "If you really want to make this formula use --force."
 
   case name.downcase
-  when /libxml/, /libxlst/, /freetype/, /libpng/, /wxwidgets/
+  when /libxml/, /libxlst/, /freetype/, /libpng/
     raise <<-EOS
 #{name} is blacklisted for creation
 Apple distributes this library with OS X, you can find it in /usr/X11/lib.
@@ -177,12 +185,9 @@ def github_info name
   return "http://github.com/#{user}/homebrew/commits/#{branch}/Library/Formula/#{formula_name}"
 end
 
-def info name
-  require 'formula'
+def info f
+  exec 'open', github_info(f.name) if ARGV.flag? '--github'
 
-  exec 'open', github_info(name) if ARGV.flag? '--github'
-
-  f=Formula.factory name
   puts "#{f.name} #{f.version}"
   puts f.homepage
 
@@ -205,7 +210,7 @@ def info name
     puts
   end
 
-  history = github_info(name)
+  history = github_info(f.name)
   puts history if history
 
 rescue FormulaUnavailableError
@@ -434,7 +439,7 @@ def brew_install
   ################################################################# warnings
   begin
     if MACOS_VERSION >= 10.6
-      opoo "You should upgrade to Xcode 3.2.1" if llvm_build < RECOMMENDED_LLVM
+      opoo "You should upgrade to Xcode 3.2.2" if llvm_build < RECOMMENDED_LLVM
     else
       opoo "You should upgrade to Xcode 3.1.4" if (gcc_40_build < RECOMMENDED_GCC_40) or (gcc_42_build < RECOMMENDED_GCC_42)
     end
