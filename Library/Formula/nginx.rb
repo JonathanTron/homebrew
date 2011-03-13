@@ -24,7 +24,7 @@ class Nginx < Formula
   def options
     [
       ['--with-passenger', "Compile with support for Phusion Passenger module"],
-      ['--with-webdav',    "Compile with support for WebDAV module"]
+      ['--with-webdav',    "Compile with support for WebDAV module"],
       ['--with-push',      "Compile with support for NGiNX_HTTP_Push_Module"],
     ]
   end
